@@ -236,10 +236,10 @@ retrying policy check action = go defaultRetryStatus
 
 -- | Run an action and recover from a raised exception by potentially
 -- | retrying the action a number of times.
-recovering :: ∀ m a . MonadAff m
-  => MonadError Error m
+recovering :: ∀ m e a . MonadAff m
+  => MonadError e m
   => RetryPolicyM m
-  -> Array (RetryStatus -> Error -> m Boolean)
+  -> Array (RetryStatus -> e -> m Boolean)
   -- ^ Should a given exception be retried? Action will be
   -- retried if this returns True *and* the policy allows it.
   -- This action will be consulted first even if the policy
